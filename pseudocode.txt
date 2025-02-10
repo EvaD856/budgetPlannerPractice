@@ -1,0 +1,67 @@
+display function
+- list all text for menu 
+- ask for user choice =
+- call the appropriate function 
+    - add expense 
+    - view summary
+    - quit
+
+add expense 
+- ask for category - added to category variable 
+- ask for amount - added to amount variable
+- add category: amount to dicitonary - expenses 
+- Display category and amount
+- back to menu 
+
+function main()
+    display "Welcome to the Budget Planner and Expense Tracker!"
+    monthlyIncome = getMonthlyIncome()
+    expenses = empty dicitonary
+
+    loop forever:
+        display menu:
+            1) Add an expense
+            2) View budget summary
+            3) Exit
+
+        userChoice = read input
+        if userChoice == 1:
+            addExpense(expenses)
+        elif userChoice == 2:
+            displaySummary(monthlyIncome, expenses)
+        elif userChoice == 3:
+            display "Goodbye!"
+            break
+        else:
+            display "Invalid choice. Try again."
+
+function getMonthlyIncome():
+    loop forever:
+        monthlyIncome = read input 
+        if monthlyIncome is a valid float and >= 0:
+            return monthlyIncome
+        else:
+            display "Invalid input. Please enter a non-negative number."
+
+function addExpense(expenses):
+    category = read category input 
+    loop forever:
+        amount = read input 
+
+        if amount is a valid float >= 0:
+            expenses[category] = expenses.get(category, 0) + amount 
+            display "Expense added."
+            break
+        else:
+            display "Invalid expense amount. Try again." 
+
+function displaySummary(monthlyIncome, expenses):
+    totalExpenses = sum of all values in expenses
+    remainingBudget = monthlyIncome - totalExpenses
+    
+    display total monthlyIncome
+    display each category and amount, plus percentage 
+    display total expenses 
+    display remaining budget 
+
+
