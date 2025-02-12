@@ -6,18 +6,31 @@
 """
 def addExpense(expenses):
     category = str(input("Enter the category: "))
-    while True():
+    while True:
         amount = float(input("Enter the amount: $"))
         if amount >= 0:
             expenses[category] = expenses.get(category, 0) + amount
-            print("Expense added!")
+            print("Added",amount, "to",category,".")
+            print("")
             break
         else:
-            print("Invalid expense amount, try again!")
+            print("-Invalid expense amount, try again!-")
 
-def viewSummary(monthlyIncome, expenses):
-    return sum(sum(amounts) for amounts in expenses.values())
-
+def viewSummary(getMonthlyIncome, expenses):
+    print("")
+    print("** Total income is $",getMonthlyIncome,"**")
+    print("")
+    print("Expenses:")
+    print("")
+    for category, amount in expenses.items():
+        percentage = amount / getMonthlyIncome * 100
+        print(f"{category}:{amount} ( {percentage:.2f} %") 
+    print("")
+    total = sum(expenses.values())
+    print("Total Expenses: $", total)  
+    remainder = getMonthlyIncome - total
+    print("Remaining Budget: $", remainder)   
+        
 def getMonthlyIncome():
     monthlyIncome = float(input("Enter monthly income: $"))
     if monthlyIncome >= 0:
@@ -27,19 +40,21 @@ def getMonthlyIncome():
 
 
 def displayMenu():
-    print("Menu")
-    print("1. Add an expense")
-    print("2. View budget summary")
-    print("3. Quit")
+    print("--Menu--")
+    print(" 1. Add an expense")
+    print(" 2. View budget summary")
+    print(" 3. Quit")
+    print("")
 
 def main():
-
+    print("")
     print("Welcome to the Budget Planner and Expense Tracker!")
+    print("")
+    monthlyIncome = getMonthlyIncome()
+    expenses = {}
+    print("")
     while True:
         displayMenu()
-        monthlyIncome = getMonthlyIncome()
-        expenses = {}
-        
         choice = int(input("Enter your choice (1-3):"))
 
         if choice == 1:
